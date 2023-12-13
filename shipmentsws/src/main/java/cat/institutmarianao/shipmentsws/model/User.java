@@ -3,6 +3,7 @@ package cat.institutmarianao.shipmentsws.model;
 import java.io.Serializable;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -44,10 +45,12 @@ public abstract class User implements Serializable {
 	
 	@ManyToOne
 	protected Role role;
-
+	
+	@NotBlank
 	protected String password;
-
+	@NotBlank
 	protected String fullName;
-
+	
+	@NotBlank
 	protected Integer extension;
 }

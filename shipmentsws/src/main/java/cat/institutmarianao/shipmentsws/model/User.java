@@ -43,6 +43,7 @@ public abstract class User implements Serializable {
 	@Id
 	protected String username;
 	
+	//VALIDATIONS
 	@ManyToOne
 	protected Role role;
 	

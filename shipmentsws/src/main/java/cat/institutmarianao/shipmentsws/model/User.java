@@ -30,6 +30,7 @@ public abstract class User implements Serializable {
 
 	/* Lombok */
 	@EqualsAndHashCode.Include
+	
 	protected String username;
 
 	protected Role role;

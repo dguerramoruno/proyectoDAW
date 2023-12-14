@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 
 // JPA  //
-@Entity(name="user")
+@Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorValue("role")
 public abstract class User implements Serializable {
@@ -39,19 +39,25 @@ public abstract class User implements Serializable {
 	@EqualsAndHashCode.Include
 	
 	//JPA//
-	
 	@Id
 	protected String username;
 	
 	//VALIDATIONS
-	@ManyToOne
 	protected Role role;
 	
+	//VALIDATIONS
 	@NotBlank
 	protected String password;
+
+	//VALIDATIONS
 	@NotBlank
+	//JPA//
+	@Column(name="full_name",nullable = false)	
 	protected String fullName;
 	
+	//VALIDATIONS
 	@NotBlank
+	//JPA//
+	
 	protected Integer extension;
 }

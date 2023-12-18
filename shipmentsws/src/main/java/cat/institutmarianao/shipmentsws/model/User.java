@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 // JPA  //
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorValue("role")
+@DiscriminatorColumn()
 public abstract class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -39,9 +39,14 @@ public abstract class User implements Serializable {
 	@EqualsAndHashCode.Include
 	//JPA//
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(unique = true,nullable = false)
 	protected String username;
 	
 	//VALIDATIONS
+	
+	@Enumerated(EnumType.STRING)
+	@Column(unique = true,nullable = false)
 	protected Role role;
 	
 	//VALIDATIONS

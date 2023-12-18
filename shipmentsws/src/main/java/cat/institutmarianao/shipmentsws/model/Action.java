@@ -12,7 +12,8 @@ import nonapi.io.github.classgraph.json.Id;
 
 //JPA
 @Entity
-@DiscriminatorColumn()
+@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 /* Lombok */
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)

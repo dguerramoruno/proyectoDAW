@@ -1,14 +1,19 @@
 package cat.institutmarianao.shipmentsws.model;
 
 import java.io.Serializable;
+
 import java.util.List;
 
 import org.hibernate.annotations.Formula;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Setter;
+
+@Entity
 
 /* Lombok */
 @Data
@@ -33,8 +38,15 @@ public class Shipment implements Serializable {
 
 	/* Lombok */
 	@EqualsAndHashCode.Include
+	
+	@NotNull
+	
+	@Id
+	@Column(unique=true,nullable=false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	
 	private Category category;
 
 	private Address sender;
@@ -61,6 +73,8 @@ public class Shipment implements Serializable {
 			+ " WHERE last_action.shipment_id=a.shipment_id AND last_action.shipment_id=id ))")
 	// Lombok
 	@Setter(AccessLevel.NONE)
+	
+	@Column(unique=true,nullable = false)
 	private Status status;
 
 }

@@ -5,6 +5,7 @@ package cat.institutmarianao.shipmentsws.model;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,6 +18,8 @@ public class Office implements Serializable {
 
 	public static final int MAX_NAME = 100;
 
+	//JPA//
+	@Id
 	/* Lombok */
 	@EqualsAndHashCode.Include
 	private Long id;

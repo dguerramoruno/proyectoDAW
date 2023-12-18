@@ -2,12 +2,19 @@ package cat.institutmarianao.shipmentsws.model;
 
 import java.io.Serializable;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /* Lombok */
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+
+// JPA  //
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorValue("role")
 public abstract class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -30,14 +37,26 @@ public abstract class User implements Serializable {
 
 	/* Lombok */
 	@EqualsAndHashCode.Include
-	
+	//JPA//
+	@Id
 	protected String username;
-
+	
+	//VALIDATIONS
 	protected Role role;
-
+	
+	//VALIDATIONS
+	@NotBlank
 	protected String password;
 
+	//VALIDATIONS
+	@NotBlank
+	//JPA//
+	@Column(name="full_name",nullable = false)	
 	protected String fullName;
-
+	
+	//VALIDATIONS
+	@NotBlank
+	//JPA//
+	
 	protected Integer extension;
 }

@@ -8,6 +8,8 @@ import org.hibernate.annotations.Formula;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,6 +19,7 @@ import lombok.Setter;
 
 /* Lombok */
 @Data
+@Table(name="shipments")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Shipment implements Serializable {
 
@@ -38,31 +41,39 @@ public class Shipment implements Serializable {
 
 	/* Lombok */
 	@EqualsAndHashCode.Include
-	
+	//VALIDATIONS
 	@NotNull
-	
+	//JPA
 	@Id
 	@Column(unique=true,nullable=false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	
+	//JPA
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
 	private Category category;
-
+	
+	@Column(nullable = false)	
 	private Address sender;
-
+	
+	@Column(nullable = false)	
 	private Address recipient;
-
+	
+	@Positive
 	private Float weight;
+	@Positive
 	private Float height;
+	@Positive
 	private Float width;
+	@Positive
 	private Float length;
 
 	private Boolean express;
 	private Boolean fragile;
-
+	@Size(max = 500, message = "La nota no puede tener mas de 500 caracteres")
 	private String note;
-
+    
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "shipment")
 	private List<Action> tracking;
 
 	/* Hibernate */
@@ -73,7 +84,8 @@ public class Shipment implements Serializable {
 			+ " WHERE last_action.shipment_id=a.shipment_id AND last_action.shipment_id=id ))")
 	// Lombok
 	@Setter(AccessLevel.NONE)
-	
+	//JPA
+	@Enumerated(EnumType.STRING)
 	@Column(unique=true,nullable = false)
 	private Status status;
 

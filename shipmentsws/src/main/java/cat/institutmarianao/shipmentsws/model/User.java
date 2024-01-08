@@ -1,20 +1,21 @@
 package cat.institutmarianao.shipmentsws.model;
 
-import java.io.Serializable;
+import java.io.Serializable; 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /* Lombok */
 @Data
+@Table(name="users")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 
 // JPA  //
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn()
+@DiscriminatorColumn(name="user")
 public abstract class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -41,6 +42,8 @@ public abstract class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(unique = true,nullable = false)
+	//VALIDATIONS
+	@Size(min = MIN_USERNAME,max = MAX_USERNAME)
 	protected String username;
 	
 	//VALIDATIONS
@@ -51,17 +54,18 @@ public abstract class User implements Serializable {
 	
 	//VALIDATIONS
 	@NotBlank
+	@Size(min = MIN_PASSWORD)
 	protected String password;
 
 	//VALIDATIONS
 	@NotBlank
+	@Size(min=MIN_FULL_NAME,max=MAX_FULL_NAME)
 	//JPA//
 	@Column(name="full_name",nullable = false)	
 	protected String fullName;
 	
 	//VALIDATIONS
 	@NotBlank
-	//JPA//
-	
+	@Size(max=MAX_EXTENSION,message="Minimo 2 caracteres de extension")
 	protected Integer extension;
 }

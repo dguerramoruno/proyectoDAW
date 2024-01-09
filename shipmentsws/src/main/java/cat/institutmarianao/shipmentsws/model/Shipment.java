@@ -53,10 +53,12 @@ public class Shipment implements Serializable {
 	@Column(nullable = false)
 	private Category category;
 	
-	@Column(nullable = false)	
+	@ManyToOne
+	@JoinColumn(name="sender_id",nullable = false)		
 	private Address sender;
 	
-	@Column(nullable = false)	
+	@ManyToOne
+	@JoinColumn(name="recipient_id",nullable = false)	
 	private Address recipient;
 	
 	@Positive
@@ -86,7 +88,6 @@ public class Shipment implements Serializable {
 	@Setter(AccessLevel.NONE)
 	//JPA
 	@Enumerated(EnumType.STRING)
-	@Column(unique=true,nullable = false)
 	private Status status;
 
 }

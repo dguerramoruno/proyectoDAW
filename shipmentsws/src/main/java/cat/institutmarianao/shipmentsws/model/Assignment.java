@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
-
+@DiscriminatorValue(Action.ASSIGNMENT)
 /* Lombok */
 @Data
 @EqualsAndHashCode(callSuper = true)

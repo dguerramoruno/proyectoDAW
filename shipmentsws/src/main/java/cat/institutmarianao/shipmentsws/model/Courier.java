@@ -3,7 +3,6 @@ package cat.institutmarianao.shipmentsws.model;
 import java.io.Serializable;
 
 import jakarta.persistence.*;
-import jakarta.persistence.Entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -16,6 +15,7 @@ import lombok.EqualsAndHashCode;
 public class Courier extends User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	@ManyToOne
+	@JoinColumn(name="company_id",nullable = false)
 	private Company company;
 }

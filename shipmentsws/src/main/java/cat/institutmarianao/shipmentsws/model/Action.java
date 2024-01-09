@@ -1,19 +1,21 @@
 package cat.institutmarianao.shipmentsws.model;
 
-import java.io.Serializable; 
+import java.io.Serializable;  
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.*;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import nonapi.io.github.classgraph.json.Id;
 
 //JPA
 @Entity
 @Table(name="actions")
-@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 /* Lombok */
 @Data
@@ -46,26 +48,27 @@ public abstract class Action implements Serializable {
 	//VALIDATIONS
 	@NotNull
 	//JPA
+	@Column(insertable=false, updatable=false)
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)	
-	protected Type type;
+	protected Action.Type type;
 	
 	//VALIDATIONS
 	@NotNull
 	//JPA
 	@ManyToOne
-	@Column(name="performer_username",nullable = false)
+	@JoinColumn(name="performer_username",nullable = false)
 	protected User performer;
 	//VALIDATIONS
 	@NotNull
 	//JPA
 	@PastOrPresent
 	@Column(nullable = false,columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	protected Date date = new Date();
 	//VALIDATIONS
 	@NotNull
 	//JPA
 	@ManyToOne
-	@Column(name="shimpent_id",nullable = false,insertable = false)
+	@JoinColumn(name="shipment_id",nullable = false,insertable = false)
 	protected Shipment shipment;
 }

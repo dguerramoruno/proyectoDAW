@@ -1,6 +1,8 @@
 package cat.institutmarianao.shipmentsws.model;
 
-import java.io.Serializable; 
+import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -15,7 +17,7 @@ import lombok.EqualsAndHashCode;
 // JPA  //
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="user")
+@DiscriminatorColumn(name="role")
 public abstract class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -49,12 +51,13 @@ public abstract class User implements Serializable {
 	//VALIDATIONS
 	
 	@Enumerated(EnumType.STRING)
-	@Column(unique = true,nullable = false)
+	@Column(insertable=false, updatable=false)
 	protected Role role;
 	
 	//VALIDATIONS
 	@NotBlank
 	@Size(min = MIN_PASSWORD)
+	@JsonIgnore
 	protected String password;
 
 	//VALIDATIONS

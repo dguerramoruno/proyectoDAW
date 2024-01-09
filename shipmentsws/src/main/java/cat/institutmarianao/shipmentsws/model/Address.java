@@ -1,6 +1,8 @@
 package cat.institutmarianao.shipmentsws.model;
 
-import java.io.Serializable; 
+import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -8,7 +10,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
-@Table(name="address")
+@Table(name="addresses")
 /* Lombok */
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -47,6 +49,7 @@ public class Address implements Serializable {
 	private String province;
 	@NotBlank
 	@Column(unique = false,nullable=true)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "#####")
 	private String postalCode;
 	@NotBlank
 	@Column(unique = false,nullable=false)

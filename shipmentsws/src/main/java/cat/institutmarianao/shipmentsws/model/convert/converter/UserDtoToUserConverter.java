@@ -12,6 +12,7 @@ import cat.institutmarianao.shipmentsws.model.dto.CourierDto;
 import cat.institutmarianao.shipmentsws.model.dto.LogisticsManagerDto;
 import cat.institutmarianao.shipmentsws.model.dto.ReceptionistDto;
 import cat.institutmarianao.shipmentsws.model.dto.UserDto;
+import cat.institutmarianao.shipmentsws.services.OfficeService;
 
 @Component
 public class UserDtoToUserConverter implements Converter<UserDto, User> {
@@ -33,6 +34,8 @@ public class UserDtoToUserConverter implements Converter<UserDto, User> {
 			copyCommonProperties(receptionistDto, receptionist);
 
 			// TODO Copy office
+			receptionistDto.getOfficeId();
+			OfficeService
 			receptionist.setPlace(receptionistDto.getPlace());
 			return receptionist;
 		}

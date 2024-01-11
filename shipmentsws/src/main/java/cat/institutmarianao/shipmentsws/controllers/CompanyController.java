@@ -1,7 +1,9 @@
 package cat.institutmarianao.shipmentsws.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import cat.institutmarianao.shipmentsws.model.Company;
+import cat.institutmarianao.shipmentsws.model.User;
+import cat.institutmarianao.shipmentsws.model.dto.UserDto;
+import cat.institutmarianao.shipmentsws.services.CompanyService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -25,6 +30,8 @@ import jakarta.validation.constraints.Positive;
 public class CompanyController {
 
 //	@Autowired
+	@Autowired
+	private CompanyService companyService;
 //	private CompanyService companyService;
 
 	@Operation(summary = "Find all companies")
@@ -33,7 +40,15 @@ public class CompanyController {
 
 	@GetMapping(value = "/find/all")
 	public List<Company> findAll() {
-		// TODO find all companies
+
+		List<Company> companies = companyService.findAll();
+
+		List<UserDto> usersDto = new ArrayList<>(users.size());
+		for (User user : users) {
+			UserDto userDto = conversionService.convert(user, UserDto.class);
+			usersDto.add(userDto);
+		}
+
 		return null;
 	}
 

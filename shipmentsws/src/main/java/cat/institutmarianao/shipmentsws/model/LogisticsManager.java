@@ -2,12 +2,13 @@ package cat.institutmarianao.shipmentsws.model;
 
 import java.io.Serializable;
 
+
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
-@DiscriminatorValue(value="logisticmanager")
+@DiscriminatorValue(User.LOGISTICS_MANAGER)
 /* Lombok */
 @Data
 @EqualsAndHashCode(callSuper = true)

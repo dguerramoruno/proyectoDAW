@@ -3,7 +3,7 @@ package cat.institutmarianao.shipmentsws.model;
 import java.io.Serializable;  
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 import jakarta.persistence.*;
 import jakarta.persistence.Id;
@@ -63,7 +63,6 @@ public abstract class Action implements Serializable {
 	//JPA
 	@PastOrPresent
 	@Column(nullable = false,columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	protected Date date = new Date();
 	//VALIDATIONS
 	@NotNull

@@ -49,7 +49,6 @@ public class Address implements Serializable {
 	private String province;
 	@NotBlank
 	@Column(unique = false,nullable=true)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "#####")
 	private String postalCode;
 	@NotBlank
 	@Column(unique = false,nullable=false)

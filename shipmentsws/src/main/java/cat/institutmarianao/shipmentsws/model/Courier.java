@@ -2,13 +2,15 @@ package cat.institutmarianao.shipmentsws.model;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 
 @Entity
-@DiscriminatorValue(value = "courier")
+@DiscriminatorValue(User.COURIER)
 /* Lombok */
 @Data
 @EqualsAndHashCode(callSuper = true)

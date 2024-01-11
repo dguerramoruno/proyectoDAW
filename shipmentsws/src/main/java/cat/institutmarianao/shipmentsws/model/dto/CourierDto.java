@@ -2,6 +2,9 @@ package cat.institutmarianao.shipmentsws.model.dto;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
+import cat.institutmarianao.shipmentsws.model.User;
 import cat.institutmarianao.shipmentsws.validation.groups.OnUserCreate;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

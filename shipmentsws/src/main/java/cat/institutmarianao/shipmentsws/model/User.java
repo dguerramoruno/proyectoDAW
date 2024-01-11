@@ -2,8 +2,7 @@ package cat.institutmarianao.shipmentsws.model;
 
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import cat.institutmarianao.shipmentsws.validation.groups.OnUserCreate;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
@@ -11,13 +10,13 @@ import lombok.EqualsAndHashCode;
 
 /* Lombok */
 @Data
-@Table(name="users")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 
 // JPA  //
 @Entity
+@Table(name="users")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="role")
+@DiscriminatorColumn(name="role", discriminatorType = DiscriminatorType.STRING)
 public abstract class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -42,7 +41,6 @@ public abstract class User implements Serializable {
 	@EqualsAndHashCode.Include
 	//JPA//
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(unique = true,nullable = false)
 	//VALIDATIONS
 	@Size(min = MIN_USERNAME,max = MAX_USERNAME)
@@ -51,13 +49,12 @@ public abstract class User implements Serializable {
 	//VALIDATIONS
 	
 	@Enumerated(EnumType.STRING)
-	@Column(insertable=false, updatable=false)
+	@Column(name="role",insertable=false, updatable=false, nullable=false)
 	protected Role role;
 	
 	//VALIDATIONS
-	@NotBlank
+	@NotBlank(groups = OnUserCreate.class)
 	@Size(min = MIN_PASSWORD)
-	@JsonIgnore
 	protected String password;
 
 	//VALIDATIONS
@@ -68,7 +65,6 @@ public abstract class User implements Serializable {
 	protected String fullName;
 	
 	//VALIDATIONS
-	@NotBlank
-	@Size(max=MAX_EXTENSION,message="Minimo 2 caracteres de extension")
+	@Max(value = MAX_EXTENSION,message="Minimo 2 caracteres de extension")
 	protected Integer extension;
 }

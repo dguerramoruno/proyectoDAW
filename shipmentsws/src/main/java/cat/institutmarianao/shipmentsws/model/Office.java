@@ -12,8 +12,10 @@ import lombok.EqualsAndHashCode;
 
 /* Lombok */
 @Data
-@Table(name="offices")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+/* JPA */
+@Table(name="offices")
+@Entity
 public class Office implements Serializable {
 
 	private static final long serialVersionUID = 1L;

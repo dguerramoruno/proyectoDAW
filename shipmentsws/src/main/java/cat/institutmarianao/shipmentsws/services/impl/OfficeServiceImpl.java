@@ -3,6 +3,7 @@ package cat.institutmarianao.shipmentsws.services.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import cat.institutmarianao.shipmentsws.model.Office;
 import cat.institutmarianao.shipmentsws.repositories.OfficeRepository;
@@ -11,19 +12,20 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+@Service
 public class OfficeServiceImpl implements OfficeService {
 	@Autowired
 	private OfficeRepository officeRepository;
 
 	@Override
-	public List<Office> findAll(Long id, String fullName) {
+	public List<Office> findAll() {
 
 		List<Office> offices = officeRepository.findAll();
 		return offices;
 	}
 
 	@Override
-	public Office getById(@NotBlank Long id) {
+	public Office getById(Long id) {
 		Office officeId = officeRepository.getReferenceById(id);
 		return officeId;
 	}

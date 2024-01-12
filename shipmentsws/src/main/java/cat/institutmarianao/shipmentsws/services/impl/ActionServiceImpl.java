@@ -3,6 +3,7 @@ package cat.institutmarianao.shipmentsws.services.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import cat.institutmarianao.shipmentsws.model.Action;
 import cat.institutmarianao.shipmentsws.repositories.ActionRepository;
@@ -11,12 +12,13 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+@Service
 public class ActionServiceImpl implements ActionService {
 	@Autowired
 	private ActionRepository actionRepository;
 
 	@Override
-	public List<Action> findAll(Long id, String type) {
+	public List<Action> findAll() {
 
 		return actionRepository.findAll();
 	}

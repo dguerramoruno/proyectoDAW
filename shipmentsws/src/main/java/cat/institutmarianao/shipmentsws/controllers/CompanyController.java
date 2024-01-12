@@ -1,6 +1,5 @@
 package cat.institutmarianao.shipmentsws.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import cat.institutmarianao.shipmentsws.model.Company;
-import cat.institutmarianao.shipmentsws.model.User;
-import cat.institutmarianao.shipmentsws.model.dto.UserDto;
 import cat.institutmarianao.shipmentsws.services.CompanyService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -29,9 +26,9 @@ import jakarta.validation.constraints.Positive;
 @Validated
 public class CompanyController {
 
-//	@Autowired
 	@Autowired
 	private CompanyService companyService;
+
 //	private CompanyService companyService;
 
 	@Operation(summary = "Find all companies")
@@ -41,15 +38,8 @@ public class CompanyController {
 	@GetMapping(value = "/find/all")
 	public List<Company> findAll() {
 
-		List<Company> companies = companyService.findAll();
+		return companyService.findAll();
 
-		List<UserDto> usersDto = new ArrayList<>(users.size());
-		for (User user : users) {
-			UserDto userDto = conversionService.convert(user, UserDto.class);
-			usersDto.add(userDto);
-		}
-
-		return null;
 	}
 
 	@Operation(summary = "Get company by id")
@@ -60,7 +50,7 @@ public class CompanyController {
 
 	@GetMapping("/get/by/id/{id}")
 	public Company getById(@PathVariable("id") @Positive Long id) {
-		// TODO find a company by its id
-		return null;
+		Company company = companyService.getById(id);
+		return company;
 	}
 }

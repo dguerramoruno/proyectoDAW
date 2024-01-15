@@ -10,6 +10,7 @@ import cat.institutmarianao.shipmentsws.model.Assignment;
 import cat.institutmarianao.shipmentsws.model.Courier;
 import cat.institutmarianao.shipmentsws.model.Delivery;
 import cat.institutmarianao.shipmentsws.model.Reception;
+import cat.institutmarianao.shipmentsws.model.Shipment;
 import cat.institutmarianao.shipmentsws.model.User;
 import cat.institutmarianao.shipmentsws.model.dto.ActionDto;
 import cat.institutmarianao.shipmentsws.model.dto.AssignmentDto;
@@ -57,5 +58,7 @@ public class ActionDtoToActionConverter implements Converter<ActionDto, Action> 
 		User performer = userService.getByUsername(actionDto.getPerformer());
 		action.setPerformer(performer);
 		// TODO Copy shipment
+		Shipment shipment = action.getShipment();
+
 	}
 }

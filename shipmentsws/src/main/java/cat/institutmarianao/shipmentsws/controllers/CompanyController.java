@@ -29,8 +29,6 @@ public class CompanyController {
 	@Autowired
 	private CompanyService companyService;
 
-//	private CompanyService companyService;
-
 	@Operation(summary = "Find all companies")
 	@ApiResponse(responseCode = "200", content = {
 			@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Company.class))) }, description = "Companies retrieved ok")

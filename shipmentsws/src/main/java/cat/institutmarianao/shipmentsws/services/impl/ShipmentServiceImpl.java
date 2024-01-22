@@ -3,11 +3,10 @@ package cat.institutmarianao.shipmentsws.services.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 
 import cat.institutmarianao.shipmentsws.exception.NotFoundException;
 import cat.institutmarianao.shipmentsws.model.Shipment;
-import cat.institutmarianao.shipmentsws.model.Shipment.Category;
+import cat.institutmarianao.shipmentsws.model.dto.ShipmentDto;
 import cat.institutmarianao.shipmentsws.repositories.ShipmentRepository;
 import cat.institutmarianao.shipmentsws.services.ShipmentService;
 import jakarta.validation.Valid;
@@ -20,9 +19,8 @@ public class ShipmentServiceImpl implements ShipmentService {
 	private ShipmentRepository shipmentRepository;
 
 	@Override
-	public List<Shipment> findAll(Category[] category) {
-		Specification<Shipment> spec = Specification.where(new ShipmentWhitCategory(category));
-		return shipmentRepository.findAll(spec);
+	public List<Shipment> findAll() {
+		return shipmentRepository.findAll();
 	}
 
 	@Override
@@ -44,6 +42,41 @@ public class ShipmentServiceImpl implements ShipmentService {
 	@Override
 	public void deleteById(@NotBlank Long id) {
 		shipmentRepository.deleteById(id);
+	}
+
+	@Override
+	public void deleteShipmentById(Long id) {
+		shipmentRepository.deleteById(id);
+	}
+
+	@Override
+	public List<ShipmentDto> getAllShipments() {
+		shipmentRepository.findAll();
+		return null;
+	}
+
+	@Override
+	public Shipment findShipmentById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Shipment saveShipment(Shipment shipment) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ShipmentDto> findDtoAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Shipment> findShipmnetsInProcess() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
